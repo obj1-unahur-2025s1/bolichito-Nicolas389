@@ -1,0 +1,62 @@
+import personas.*
+import colores.*
+import materiales.*
+import objetos.*
+import bolichito.*
+
+test "a Rosa le gusta la pelota, la remera y el muñeco"{
+    munieco.definirPeso(1)
+    assert.that(Rosa.leGusta(pelota) && Rosa.leGusta(remera) 
+        && Rosa.leGusta(munieco))
+}
+
+test "a Rosa no le gusta la biblioteca y la placa"{
+    placa.definirPeso(3.5)
+    assert.notThat(Rosa.leGusta(biblioteca) 
+        && Rosa.leGusta(placa))
+}
+
+test "a Estefania le gusta una placa roja y la biblioteca"{
+    placa.definirColor(rojo)
+    assert.that(Estefania.leGusta(placa) && 
+        Estefania.leGusta(biblioteca))
+}
+
+test "a Estefania no le gusta la pelota y el muñeco "{
+    assert.notThat(Estefania.leGusta(pelota) 
+         && Estefania.leGusta(munieco))
+}
+
+test "a Luisa le gusta la placa de cobre y el muñeco"{
+    assert.that(Luisa.leGusta(placa) &&
+        Luisa.leGusta(munieco))
+}
+
+test "a Luisa no le gusta la remera y la pelota"{
+    assert.notThat(Luisa.leGusta(pelota) &&
+        Luisa.leGusta(remera))
+}
+
+test "a Juan la pelota, el muñeco y la placa"{
+    placa.definirPeso(1.5)
+    assert.that(Juan.leGusta(pelota) && Juan.leGusta(munieco)
+        || Juan.leGusta(placa))      
+}
+
+test "a Juan no le gusta la biblioteca y la remera"{
+    assert.notThat(Juan.leGusta(biblioteca) &&
+        Juan.leGusta(remera))
+}
+
+test "bolichito puede ofrecerle algo a Estefania, a Juan y no a Luisa"{
+    bolichito.cambiarObjetoVidriera(remera)
+    bolichito.cambiarObjetoMostrador(pelota)
+    assert.that(Estefania.leGusta(bolichito.objetoEnVidriera())
+        && Juan.leGusta(bolichito.objetoEnMostrador())
+        && !Luisa.leGusta(bolichito.objetoEnMostrador())
+        && !Luisa.leGusta(bolichito.objetoEnVidriera()))
+}
+
+test"el objeto en mostrador es"{
+    assert.equals(pelota, bolichito.objetoEnMostrador())
+}
